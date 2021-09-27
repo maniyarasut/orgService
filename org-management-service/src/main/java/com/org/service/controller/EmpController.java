@@ -1,0 +1,54 @@
+package com.org.service.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.org.service.dto.EmpRequest;
+import com.org.service.model.Emp;
+import com.org.service.service.EmpService;
+
+@RestController
+@RequestMapping("/emp")
+public class EmpController {
+
+	@Autowired
+	EmpService empService;
+
+	@GetMapping
+	public List<Emp> getallEmp() {
+		return empService.getallEmp();
+	}
+
+	@GetMapping("/{id}")
+	public Emp getEmpById(@PathVariable("id") Long id) throws Exception {
+		return empService.getEmp(id);
+	}
+
+	@PostMapping
+	public Emp createEmp(@Valid @RequestBody EmpRequest request) throws Exception {
+		return empService.addEmp(request);
+	}
+
+	@PutMapping
+	public Emp updateEmp(@Valid @RequestBody EmpRequest request) throws Exception {
+		return empService.updateEmp(request);
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<String> deleteEmpById(@PathVariable("id") Long id) throws Exception {
+		return empService.deleteEmp(id);
+	}
+
+}
