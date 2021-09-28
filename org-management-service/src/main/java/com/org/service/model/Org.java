@@ -9,31 +9,46 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(name="Org")
-public class Org implements Serializable{
+@Table(name = "Org")
+@XmlRootElement
+public class Org implements Serializable {
 
-
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2340219323120469344L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
 	@NotNull
-    @Column(name="name")
-    private String name;
-    
-    @Column(name="location")
-    private String location;
-    
-    @NotNull
-    @Column(name="email", nullable=false, length=200)
-    private String email;
+	@Column(name = "name")
+	private String name;
+
+	@Column(name = "location")
+	private String location;
+
+	@NotNull
+	@Column(name = "email", nullable = false, length = 200)
+	private String email;
+	
+	
+
+	public Org(Long id, @NotNull String name, String location, @NotNull String email) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.location = location;
+		this.email = email;
+	}
+	
+	public Org() {
+		
+	}
 
 	public Long getId() {
 		return id;
@@ -66,7 +81,5 @@ public class Org implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-    
-    
-    
+
 }

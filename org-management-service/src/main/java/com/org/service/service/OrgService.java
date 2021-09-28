@@ -38,7 +38,7 @@ public class OrgService {
 		if (orgOpt.isPresent()) {
 			return orgOpt.get();
 		}
-		throw new Exception("Organisation not found");
+		throw new Exception("Organization not found");
 	}
 	
 	public Org addOrg(Org request) throws Exception {
@@ -46,8 +46,7 @@ public class OrgService {
 		org.setEmail(request.getEmail());
 		org.setName(request.getName());
 		org.setLocation(request.getLocation());
-		orgRepo.save(org);
-		return org;
+		return orgRepo.save(org);
 	}
 	
 	public Org updateOrg(Org request) throws Exception {
@@ -63,7 +62,7 @@ public class OrgService {
 				return org;
 			}
 		}
-		throw new Exception("Invalid orgloyee Id");
+		throw new Exception("Invalid org Id");
 	}
 	
 	

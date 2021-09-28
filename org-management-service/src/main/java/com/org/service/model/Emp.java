@@ -13,37 +13,51 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="EMP")
+@Table(name = "EMP")
+@XmlRootElement
 public class Emp implements Serializable {
 
-    /**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6725971514049720322L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(name="first_name")
-    private String firstName;
-    
-    @Column(name="last_name")
-    private String lastName;
-    
-    @Column(name="email", nullable=false, length=200)
-    private String email;
-    
-    @OneToOne
-    @JoinColumn(name="ORGID",nullable=false)
-    private Org org;
-    
-    
-    public Long getId() {
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(name = "first_name")
+	private String firstName;
+
+	@Column(name = "last_name")
+	private String lastName;
+
+	@Column(name = "email", nullable = false, length = 200)
+	private String email;
+
+	@OneToOne
+	@JoinColumn(name = "ORGID", nullable = false)
+	private Org org;
+
+	public Emp() {
+
+	}
+
+	public Emp(Long id, String firstName, String lastName, String email, Org org) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.org = org;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -82,7 +96,5 @@ public class Emp implements Serializable {
 	public void setOrg(Org org) {
 		this.org = org;
 	}
-
-		
 
 }

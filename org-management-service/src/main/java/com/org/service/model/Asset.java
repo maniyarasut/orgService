@@ -11,12 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="Asset")
+@XmlRootElement
 public class Asset implements Serializable{
 
 	/**
@@ -39,7 +41,20 @@ public class Asset implements Serializable{
     @ManyToOne
     @JoinColumn(name="empid")
     private Emp emp;
+    
+    
 
+	public Asset(Long id, String name, Org org, Emp emp) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.org = org;
+		this.emp = emp;
+	}
+
+	public Asset() {
+		
+	}
 	public Long getId() {
 		return id;
 	}

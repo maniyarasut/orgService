@@ -35,7 +35,7 @@ public class AssetService {
 	}
 
 	public Asset getAsset(Long id) throws Exception {
-		Asset asset = assetRepo.findAssetById(id);
+		Asset asset = assetRepo.findAssetById(id);//Using Join fetch to ignore n+1 problem
 		if (asset!=null) {
 			return asset;
 		}
@@ -50,18 +50,17 @@ public class AssetService {
 				asset.setName(request.getAssetName());
 				asset.setOrg(orgOpt.get());
 				if (request.getEmpId() != null) {
-					Emp emp= empRepo.getOne(request.getEmpId());
+					Emp emp= empRepo.getOne(request.getEmpId()); //Get the Emp Details
 					if(emp!=null && emp.getOrg().getId().equals(request.getOrgId()))
 						asset.setEmp(emp);
 					else if(emp!=null && !emp.getOrg().getId().equals(request.getOrgId()))
-						throw new Exception("Organisation & Employee mismatch");
+						throw new Exception("Organization Id & Employee ID mismatch"); //Checking whether the emp belongs to the given Organisation
 				}
-				assetRepo.save(asset);
-				return asset;
+				return assetRepo.save(asset);
 
 			}
 		}
-		throw new Exception("Invalid Organisation Id");
+		throw new Exception("Invalid Organization Id");
 	}
 
 	public Asset updateAsset(AssetRequest request) throws Exception {
@@ -80,7 +79,7 @@ public class AssetService {
 
 		if (request.getOrgId() != null && request.getOrgId() != 0) {
 			Optional<Org> orgOpt = orgRepo.findById(request.getOrgId());
-			if (orgOpt.isPresent()) {
+			if (orgOpt.isPresent()) {//Checking whether Organization is valid
 				asset.setName(request.getAssetName());
 				asset.setOrg(orgOpt.get());
 				if (request.getEmpId() != null) {
@@ -88,13 +87,13 @@ public class AssetService {
 					if(emp!=null && emp.getOrg().getId().equals(request.getOrgId()))
 						asset.setEmp(emp);
 					else if(emp!=null && !emp.getOrg().getId().equals(request.getOrgId()))
-						throw new Exception("Organisation & Employee mismatch");
+						throw new Exception("Organization & Employee mismatch");//Checking whether the emp belongs to the given Organisation
 				}
 				return asset;
 
 			}
 		}
-		throw new Exception("Invalid OrganisationId");
+		throw new Exception("Invalid OrganizationId");
 
 	}
 
