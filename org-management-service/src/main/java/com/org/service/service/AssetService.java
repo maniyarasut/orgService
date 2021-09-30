@@ -31,7 +31,8 @@ public class AssetService {
 	EmpRepo empRepo;
 
 	public List<Asset> getallAsset() {
-		return assetRepo.findAllAsset();
+		//return assetRepo.findAllAsset();
+		return assetRepo.findAll();
 	}
 
 	public Asset getAsset(Long id) throws Exception {

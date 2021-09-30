@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -33,12 +34,12 @@ public class Asset implements Serializable{
     @Column(name="name")
     private String name;
     
-    @OneToOne
+    @OneToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="orgid",nullable=false)
     private Org org;
     
     @JsonManagedReference
-    @ManyToOne
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="empid")
     private Emp emp;
     

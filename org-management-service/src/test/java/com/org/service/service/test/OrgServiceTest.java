@@ -3,8 +3,6 @@ package com.org.service.service.test;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.doNothing;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.Test;
@@ -39,15 +37,7 @@ public class OrgServiceTest {
 	@Mock
 	AssetRepo assetRepo;
 
-	@Test
-	public void getAllOrgTest() {
-		List<Org> expected = new ArrayList<Org>();
-		expected.add(new Org(1L, "test", "test", "test@test.com"));
-		Mockito.when(repo.findAll()).thenReturn(expected);
-		List<Org> actual = service.getallOrg();
-		assertEquals(expected.get(0).getId(), actual.get(0).getId());
-	}
-
+	
 	@Test
 	public void getOrgTest() throws Exception {
 		Org expected = new Org(1L, "test", "test", "test@test.com");

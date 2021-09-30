@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import com.org.service.model.Asset;
-
+@Repository
 public interface AssetRepo extends JpaRepository<Asset, Long> {
 	
 	@Query("select asset from Asset asset left outer join fetch asset.org org left outer join fetch asset.emp emp")
