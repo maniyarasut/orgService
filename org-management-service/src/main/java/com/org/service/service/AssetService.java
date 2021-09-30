@@ -83,11 +83,14 @@ public class AssetService {
 				asset.setName(request.getAssetName());
 				asset.setOrg(orgOpt.get());
 				if (request.getEmpId() != null) {
-					Emp emp= empRepo.getOne(request.getEmpId());
-					if(emp!=null && emp.getOrg().getId().equals(request.getOrgId()))
-						asset.setEmp(emp);
-					else if(emp!=null && !emp.getOrg().getId().equals(request.getOrgId()))
+					Optional<Emp> empOpt= empRepo.findById(request.getEmpId());
+					if(empOpt.isPresent() && empOpt.get().getOrg().getId().equals(request.getOrgId()))
+						asset.setEmp(empOpt.get());
+					else if(empOpt.isPresent() && !empOpt.get().getOrg().getId().equals(request.getOrgId()))
 						throw new Exception("Organization & Employee mismatch");//Checking whether the emp belongs to the given Organisation
+					else
+						throw new Exception("Employee not found");
+					
 				}
 				return asset;
 
