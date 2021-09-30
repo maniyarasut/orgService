@@ -45,7 +45,7 @@ public class AssetServiceTest {
 	public void getAllAssetTest() {
 		List<Asset> expected = new ArrayList<Asset>();
 		expected.add(new Asset(1L, "test", null,null));
-		Mockito.when(repo.findAllAsset()).thenReturn(expected);
+		Mockito.when(repo.findAll()).thenReturn(expected);
 		List<Asset> actual = service.getallAsset();
 		assertEquals(expected.get(0).getId(), actual.get(0).getId());
 	}

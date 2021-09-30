@@ -28,9 +28,9 @@ public class OrgController {
 	@Autowired
 	OrgService orgService;
 
-	@GetMapping(produces = { "application/xml", "text/xml" ,"application/json"})
-	public List<Org> getallOrg() {
-		return orgService.getallOrg();
+	@GetMapping(produces = { "application/xml", "text/xml" ,"application/json"},value="/{pageNumber}/{count}")
+	public List<Org> getallOrg(@PathVariable int pageNumber,@PathVariable int count) {
+		return orgService.getallOrg(pageNumber,count);
 	}
 	
 	@GetMapping(value="/{id}", produces = { "application/xml", "text/xml","application/json" })
